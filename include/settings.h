@@ -35,8 +35,6 @@ static byte gwip[] = { 192,168,0,1 };
 #define BLUE_COLOR      88
 #define YELLOW_COLOR    99
 
-
-
 //prototypes
 void print();
 void test_center();
@@ -48,6 +46,7 @@ void read_eeprom();
 
 void set_speed(uint8_t head_num, uint8_t value);
 void set_master_lightness(uint8_t head_num, uint8_t value);
+void set_collor_lightness(uint8_t head_num, uint8_t R_value, uint8_t G_value, uint8_t B_value);
 void set_red_lightness(uint8_t head_num, uint8_t value);
 void set_green_lightness(uint8_t head_num, uint8_t value);
 void set_blue_lightness(uint8_t head_num, uint8_t value);

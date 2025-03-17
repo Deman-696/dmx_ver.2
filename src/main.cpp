@@ -30,6 +30,20 @@ void setup() {
   lan_init();
   timer_pulse = millis();
   Serial.println("____________________________");
+  /*DmxSimple.write(mas_head[HEAD_1]+OFFSET_RED_DIMMER, 66); 
+  while (1)
+  {
+    
+    for (uint8_t i = 0; i < 250; i++){
+    //set_collor_lightness(HEAD_1, i, i, i);
+    DmxSimple.write(mas_head[HEAD_1]+OFFSET_RED_DIMMER, value); 
+    DmxSimple.write(mas_head[HEAD_1]+OFFSET_RED_DIMMER, value); 
+    //delay(100);
+    }
+    
+    
+  }*/
+  
 }
 
 void loop() {
@@ -91,6 +105,13 @@ void set_speed(uint8_t head_num, uint8_t value)  {
 
 void set_master_lightness(uint8_t head_num, uint8_t value)  {
   DmxSimple.write(mas_head[head_num]+OFFSET_RGB_DIMMER, value);
+  // delay(2);
+}
+
+void set_collor_lightness(uint8_t head_num, uint8_t R_value, uint8_t G_value, uint8_t B_value)  {
+  DmxSimple.write(mas_head[head_num]+OFFSET_RED_DIMMER, R_value); 
+  DmxSimple.write(mas_head[head_num]+OFFSET_GREEN_DIMMER, G_value); 
+  DmxSimple.write(mas_head[head_num]+OFFSET_BLUE_DIMMER, B_value); 
   // delay(2);
 }
 
