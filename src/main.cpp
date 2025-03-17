@@ -30,20 +30,8 @@ void setup() {
   lan_init();
   timer_pulse = millis();
   Serial.println("____________________________");
-  /*DmxSimple.write(mas_head[HEAD_1]+OFFSET_RED_DIMMER, 66); 
-  while (1)
-  {
-    
-    for (uint8_t i = 0; i < 250; i++){
-    //set_collor_lightness(HEAD_1, i, i, i);
-    DmxSimple.write(mas_head[HEAD_1]+OFFSET_RED_DIMMER, value); 
-    DmxSimple.write(mas_head[HEAD_1]+OFFSET_RED_DIMMER, value); 
-    //delay(100);
-    }
-    
-    
-  }*/
-  
+  /*set_master_lightness(HEAD_1, MAX_LIGHTNESS);
+  set_collor_lightness(HEAD_1, 250, 50, 50);*/
 }
 
 void loop() {
@@ -112,7 +100,6 @@ void set_collor_lightness(uint8_t head_num, uint8_t R_value, uint8_t G_value, ui
   DmxSimple.write(mas_head[head_num]+OFFSET_RED_DIMMER, R_value); 
   DmxSimple.write(mas_head[head_num]+OFFSET_GREEN_DIMMER, G_value); 
   DmxSimple.write(mas_head[head_num]+OFFSET_BLUE_DIMMER, B_value); 
-  // delay(2);
 }
 
 void set_red_lightness(uint8_t head_num, uint8_t value)  {
@@ -153,13 +140,13 @@ void udpSerialPrint(uint16_t dest_port, uint8_t src_ip[IP_LEN], uint16_t src_por
   str[len] = 0; //null-terminator: end string
 
   //-------------------------- LIGHT --------------------------------
-  //Serial.println(str);
+  Serial.println(str);
   if (strcmp(str, "light=0") == 0)  heads_off();    //off all heads
   // if (strcmp(str, "light=1") == 0)  ;
   // if (strcmp(str, "light=2") == 0)  ;
-  if (strcmp(str, "light=3") == 0)  heads_off();// wait_answer();
+  if (strcmp(str, "light=3") == 0)  heads_off(); // wait_answer();
 
-  // if (strcmp(str, "light=4") == 0)  results();    //itogi
+  // if (strcmp(str, "light=4") == 0)  results();
   if (strcmp(str, "light=5") == 0)  mini_game();  //todo mini game
   if (strcmp(str, "light=6") == 0)  boss();       //todo boss
   if (strcmp(str, "light=7") == 0)  fun_fact();   //todo fun fact
@@ -177,10 +164,10 @@ void udpSerialPrint(uint16_t dest_port, uint8_t src_ip[IP_LEN], uint16_t src_por
   if (strcmp(str, "spot=3") == 0)   tumba_light(HEAD_3, YELLOW_COLOR);
   if (strcmp(str, "spot=4") == 0)   tumba_light(HEAD_4, YELLOW_COLOR);
 
-  if (strcmp(str, "focus=1") == 0)   tumba_add_light(HEAD_1, YELLOW_COLOR);
-  if (strcmp(str, "focus=2") == 0)   tumba_add_light(HEAD_2, YELLOW_COLOR);
-  if (strcmp(str, "focus=3") == 0)   tumba_add_light(HEAD_3, YELLOW_COLOR);
-  if (strcmp(str, "focus=4") == 0)   tumba_add_light(HEAD_4, YELLOW_COLOR);
+  if (strcmp(str, "focus=1") == 0)   tumba_add_light(HEAD_1, PINK_COLOR);
+  if (strcmp(str, "focus=2") == 0)   tumba_add_light(HEAD_2, PINK_COLOR);
+  if (strcmp(str, "focus=3") == 0)   tumba_add_light(HEAD_3, PINK_COLOR);
+  if (strcmp(str, "focus=4") == 0)   tumba_add_light(HEAD_4, PINK_COLOR);
 }
 
 void heads_off() {
@@ -264,6 +251,9 @@ void tumba_add_light(uint8_t head_num, uint8_t color)
       break;
     case YELLOW_COLOR:
       set_yellow_lightness(head_num, MAX_LIGHTNESS);
+    break;
+    case PINK_COLOR:
+      set_collor_lightness(head_num, 255, 16, 240);
     break;
       default:
     break;

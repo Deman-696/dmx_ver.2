@@ -34,6 +34,7 @@ static byte gwip[] = { 192,168,0,1 };
 #define GREEN_COLOR     77
 #define BLUE_COLOR      88
 #define YELLOW_COLOR    99
+#define PINK_COLOR    0
 
 //prototypes
 void print();
